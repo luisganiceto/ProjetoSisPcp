@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/templates/Layout.xhtml">
+
+	<ui:define name="conteudo">
+		<div class="ui-fluid">
+			<h:form id="frm">
+			<p:messages id="mensagem"/>
+				<p:panel header="Cidade">
+					<p:panelGrid  id="inputs" columns="2"  layout="grid" columnClasses="ui-grid-col-2,ui-grid-col-5" styleClass="ui-panelgrid-blank" >
+						<p:outputLabel value="Nome Cidade:" />
+			            <p:inputText maxlength="50" size="50" value="#{cidadeBean.cidade.descricaoCidade}"
+			            	required="true" requiredMessage="O campo Nome Cidade é Obrigatório"/>
+			                        
+			            <p:outputLabel value="UF:" />
+			            <p:selectOneMenu filter="true" value="#{cidadeBean.cidade.idEstado}" converter="omnifaces.SelectItemsConverter"
+			            	required="true" requiredMessage="O campo UF é Obrigatório">
+			            	<f:selectItem noSelectionOption="true" itemLabel="Selecione um Estado"/>
+			            	<f:selectItems value="#{cidadeBean.estados}" var="itensEstado" 
+			            		itemValue="#{itensEstado}" itemLabel="#{itensEstado.descricaoEstado} - #{itensEstado.codUF}"
+			            		/>
+			            </p:selectOneMenu>
+            		</p:panelGrid>
+            		
+					<p:panelGrid columns="3" layout="grid" styleClass="ui-panelgrid-blank">
+			        	<p:commandButton  value="Limpar" actionListener="#{cidadeBean.novo}" update="inputs"/>
+			        	<p:commandButton  value="Salvar" actionListener="#{cidadeBean.salvar}" update="mensagem inputs"/>
+			        	<p:commandButton  value="Voltar" action="/paginas/cidadeItens.xhtml?faces-redirect=true" immediate="true"/>
+			       </p:panelGrid>
+				</p:panel>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

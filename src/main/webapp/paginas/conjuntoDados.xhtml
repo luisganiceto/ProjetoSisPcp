@@ -1,0 +1,97 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/templates/Layout.xhtml">
+
+	<ui:define name="conteudo">
+		<div class="ui-fluid">
+			<p:panel header="Conjunto">
+				<h:form id="form">
+				<p:growl id="mensagem" sticky="true"/>
+					<p:fieldset legend="Identificação" style="margin-bottom:20px">
+						<p:panelGrid columns="2"  layout="grid" columnClasses="ui-grid-col-2,ui-grid-col-5" 
+							styleClass="ui-panelgrid-blank" >
+							<p:outputLabel for="codigo" value="Código do Conjunto:"/>
+							<p:inputMask id="codigo" mask="9.99.999999.999" value="#{conjuntoBean.conjunto.codigoProduto}" disabled="#{conjuntoBean.vf1}"
+								validator="#{conjuntoBean.validarCampoCodigoConjunto}" validatorMessage="O Código do Conjunto deve começar com 1"
+								required="true" requiredMessage="O campo Código do Conjunto é Obrigatório"/>
+							
+							<p:outputLabel for="descricao" value="Descrição:"/>
+							<p:inputText id="descricao" maxlength="100" value="#{conjuntoBean.conjunto.descricaoProduto}"
+								required="true" requiredMessage="O campo Descrição é Obrigatório" disabled="#{conjuntoBean.vf1}"/>
+							
+							<p:outputLabel value="Ativo:"/>
+							<p:selectBooleanCheckbox value="#{conjuntoBean.conjunto.ativo}"/>
+							
+							<p:outputLabel for="qtdVolume" value="Quantidade de Volume:"/>
+							<p:spinner id="qtdVolume" value="#{conjuntoBean.conjunto.quantidadeVolume}" disabled="#{conjuntoBean.vf1}"
+								required="true" requiredMessage="O campo Quantide de Volume é Obrigatório"/>
+							
+							<p:outputLabel value="Observações:"/>
+							<p:inputTextarea rows="2" cols="50" value="#{conjuntoBean.conjunto.observacoes}" disabled="#{conjuntoBean.vf1}"/>
+							
+						</p:panelGrid>
+					</p:fieldset>
+					<p:fieldset legend="Ficha Técnica - Montado" style="margin-bottom:20px">
+						<p:panelGrid columns="2"  layout="grid" columnClasses="ui-grid-col-2,ui-grid-col-5" 
+							styleClass="ui-panelgrid-blank" >
+							
+							<p:outputLabel value="Altura:"/>
+							<p:inputText value="#{conjuntoBean.conjunto.altura}" disabled="#{conjuntoBean.vf1}">
+								<f:convertNumber locale="pt_BR" minFractionDigits="4"/>
+							</p:inputText>
+							
+							<p:outputLabel value="Comprimento:"/>
+							<p:inputText value="#{conjuntoBean.conjunto.comprimento}" disabled="#{conjuntoBean.vf1}">
+								<f:convertNumber locale="pt_BR" minFractionDigits="4"/>
+							</p:inputText>
+							
+							<p:outputLabel value="Largura:"/>
+							<p:inputText value="#{conjuntoBean.conjunto.largura}" disabled="#{conjuntoBean.vf1}">
+								<f:convertNumber locale="pt_BR" minFractionDigits="4"/>
+							</p:inputText>
+							
+							<p:outputLabel value="Peso Bruto:"/>
+							<p:inputText value="#{conjuntoBean.conjunto.pesoBruto}" disabled="#{conjuntoBean.vf1}">
+								<f:convertNumber locale="pt_BR" minFractionDigits="4"/>
+							</p:inputText>
+							
+							<p:outputLabel value="Peso Líquido:"/>
+							<p:inputText value="#{conjuntoBean.conjunto.pesoLiquido}" disabled="#{conjuntoBean.vf1}">
+								<f:convertNumber locale="pt_BR" minFractionDigits="4"/>
+							</p:inputText>
+						</p:panelGrid>
+					</p:fieldset>
+					<p:fieldset legend="Valores" style="margin-bottom:20px">
+						<p:panelGrid columns="2"  layout="grid" columnClasses="ui-grid-col-2,ui-grid-col-5" 
+							styleClass="ui-panelgrid-blank" >	
+							<p:outputLabel value="Custo:"/>
+							<p:inputText value="#{conjuntoBean.conjunto.valorCusto}" disabled="true">
+								<f:convertNumber locale="pt_BR" minFractionDigits="4"/>
+							</p:inputText>
+							
+							<p:outputLabel value="Preço Bruto:"/>
+							<p:inputText value="#{conjuntoBean.conjunto.valorBruto}" disabled="#{conjuntoBean.vf1}">
+								<f:convertNumber locale="pt_BR" minFractionDigits="4"/>
+							</p:inputText>
+							
+							<p:outputLabel value="Preço Líquido:"/>
+							<p:inputText value="#{conjuntoBean.conjunto.valorLiquido}" disabled="#{conjuntoBean.vf1}">
+								<f:convertNumber locale="pt_BR" minFractionDigits="4"/>
+							</p:inputText>
+						</p:panelGrid>
+					</p:fieldset>
+					<p:panelGrid columns="6" layout="grid" styleClass="ui-panelgrid-blank">
+				       	<p:commandButton  value="Novo" actionListener="#{conjuntoBean.novo}" icon="fa fa-sticky-note-o" update="form"/>
+				       	<p:commandButton  value="Editar" icon="fa fa-pencil-square-o" update="form" actionListener="#{conjuntoBean.liberandoEdicao()}" disabled="#{conjuntoBean.vf2}"/>
+				       	<p:commandButton  value="Salvar" actionListener="#{conjuntoBean.salvar}" icon="fa fa-floppy-o " update="form" disabled="#{conjuntoBean.vf1}"/>
+				       	<p:commandButton  value="Estrutura" action="/paginas/estruturaItens.xhtml?faces-redirect=true" icon="fa fa-link" disabled="#{conjuntoBean.vf2}"/>
+				       	<p:commandButton  value="Listagem Volume" action="/paginas/conjuntoItens.xhtml?faces-redirect=true" immediate="true" 
+				       		icon="fa fa-list-alt" />
+				    </p:panelGrid>
+				</h:form>
+ 			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

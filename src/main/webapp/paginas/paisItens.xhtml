@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/Layout.xhtml">
+	
+	<ui:define name="conteudo">
+		<div class="ui-fluid">
+			<h:form id="frm" class="form" >
+				<p:panel header="País Listagem" >
+				<p:messages id="mensagem"/>
+					<p:dataTable reflow="true" id="tabelaItens" emptyMessage="Nenhum Registro Encontrado." 
+						value="#{paisBean.paises}" var="varPais">
+					<f:facet name="header">
+						<p:commandButton value="Adicionar" actionListener="#{paisBean.novo}" action="/paginas/paisDados.xhtml?faces-redirect=true" />
+					</f:facet>
+						<p:column headerText="ID" sortBy="#{varPais.id}">
+							<h:outputText value="#{varPais.id}" />
+						</p:column>
+						
+						<p:column headerText="Nome País" sortBy="#{varPais.descricaoPais}" filterBy="#{varPais.descricaoPais}">
+							<h:outputText value="#{varPais.descricaoPais}" />
+						</p:column>
+						
+						<p:column headerText="Nacionalidade" sortBy="#{varPais.nacionalidade}" filterBy="#{varPais.nacionalidade}">
+							<h:outputText value="#{varPais.nacionalidade}"/>
+						</p:column>
+						
+						<p:column headerText="Opções">
+							<p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank">
+								<p:commandButton icon="fa fa-trash" actionListener="#{paisBean.excluir}" update=":frm:mensagem :frm:tabelaItens">
+									<p:confirm header="Remover" message="Deseja realmente excluir o pais?" icon="fa fa-exclamation-triangle"/>
+									<f:attribute name="paisExcluido" value="#{varPais}"/>
+								</p:commandButton>
+								<p:commandButton icon="fa fa-pencil-square-o" actionListener="#{paisBean.editar}" action="/paginas/paisDados.xhtml?faces-redirect=true" >
+									<f:attribute name="paisEditado" value="#{varPais}"/>
+								</p:commandButton>
+							
+							</p:panelGrid>
+							
+							
+						</p:column>
+					</p:dataTable>
+					
+					<p:confirmDialog global="true">
+						<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+						<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times"/>
+					
+					</p:confirmDialog>
+					
+				</p:panel>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory>
+
+		<!-- Configurações de Conexão com o Banco de Dados -->
+		<property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+		<property name="connection.url">jdbc:sqlserver://localhost:1433;databaseName=ProjetoSisPcp</property>
+		<property name="connection.username">sa</property>
+		<property name="connection.password">Lu1s1994</property>
+
+		<!-- Pool de Conexões -->
+		<property name="connection.pool_size">1</property>
+
+		<!-- SQL dialect -->
+		<property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
+
+		<!-- Gerenciamento do Contexto das Sessões -->
+		<property name="current_session_context_class">thread</property>
+
+		<!-- Cache de Segundo Nível -->
+		<property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+
+		<!-- Mostra as SQLs Geradas -->
+		<property name="show_sql">true</property>
+
+		<!-- Cria as tabelas do banco de dados -->
+		<property name="hbm2ddl.auto">update</property>
+		
+		<mapping class="br.com.projetosispcp.entidade.Atividade" />
+		<mapping class="br.com.projetosispcp.entidade.AtividadeMaquina" />
+		<mapping class="br.com.projetosispcp.entidade.AtividadeOrdemProducao" />
+		<mapping class="br.com.projetosispcp.entidade.AtividadeProduto" />
+		<mapping class="br.com.projetosispcp.entidade.Cidade" />
+		<mapping class="br.com.projetosispcp.entidade.Componente" />
+		<mapping class="br.com.projetosispcp.entidade.CorRaca" />
+		<mapping class="br.com.projetosispcp.entidade.Estado" />
+		<mapping class="br.com.projetosispcp.entidade.EstadoCivil" />
+		<mapping class="br.com.projetosispcp.entidade.Estrutura" />
+		<mapping class="br.com.projetosispcp.entidade.Ferramenta" />
+		<mapping class="br.com.projetosispcp.entidade.FerramentaMaquina" />
+		<mapping class="br.com.projetosispcp.entidade.Fornecedor" />
+		<mapping class="br.com.projetosispcp.entidade.Funcao" />
+		<mapping class="br.com.projetosispcp.entidade.HistoricoPausa" />
+		<mapping class="br.com.projetosispcp.entidade.ItemLote" />
+		<mapping class="br.com.projetosispcp.entidade.Lote" />
+		<mapping class="br.com.projetosispcp.entidade.Maquina" />
+		<mapping class="br.com.projetosispcp.entidade.Operador" />
+		<mapping class="br.com.projetosispcp.entidade.OperadorMaquina" />
+		<mapping class="br.com.projetosispcp.entidade.OrdemProducao" />
+		<mapping class="br.com.projetosispcp.entidade.Pais" />
+		<mapping class="br.com.projetosispcp.entidade.Pausa" />
+		<mapping class="br.com.projetosispcp.entidade.Prancha" />
+		<mapping class="br.com.projetosispcp.entidade.Produto" />
+		<mapping class="br.com.projetosispcp.entidade.ProdutoFornecedor" />
+		<mapping class="br.com.projetosispcp.entidade.Retrabalho" />
+		<mapping class="br.com.projetosispcp.entidade.Setor" />
+		<mapping class="br.com.projetosispcp.entidade.Status" />
+		<mapping class="br.com.projetosispcp.entidade.Tipo" />
+		<mapping class="br.com.projetosispcp.entidade.TipoStatus" />
+		<mapping class="br.com.projetosispcp.entidade.TipoFerramenta" />
+		<mapping class="br.com.projetosispcp.entidade.Trilho" />
+		<mapping class="br.com.projetosispcp.entidade.Unidade" />
+		<mapping class="br.com.projetosispcp.entidade.Usuario" />
+
+	</session-factory>
+
+</hibernate-configuration>
+

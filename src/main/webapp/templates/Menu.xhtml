@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui">
+	
+	<h:form>
+    	<p:panelMenu style="width:300px">
+	        <p:submenu label="Cadastros" >
+	        	<p:menuitem value="Fornecedor" outcome="/paginas/fornecedorItens.xhtml"/>
+	        	<p:menuitem value="Ferramenta" outcome="/paginas/ferramentaItens.xhtml"/>
+	        	<p:menuitem value="Máquina" outcome="/paginas/maquinaItens.xhtml"/>
+	        	<p:menuitem value="Operador" outcome="/paginas/operadorItens.xhtml"/>
+	        	
+	            <p:submenu label="Tabelas Auxiliares" icon="ui-icon-extlink">
+	            	<p:menuitem value="Tipo Produto" outcome="/paginas/tipoProdutoItens.xhtml" />
+	            	<p:menuitem value="Tipo Ferramenta" outcome="/paginas/tipoFerramentaItens.xhtml" />
+	            	<p:menuitem value="Tipo Status" outcome="/paginas/tipoStatusItens.xhtml" />
+	            	<p:menuitem value="Status" outcome="/paginas/statusItens.xhtml" />
+	            	<p:menuitem value="Pausa" outcome="/paginas/pausaItens.xhtml" />
+	            	<p:menuitem value="Atividade" outcome="/paginas/atividadeItens.xhtml"/>
+	            	<p:menuitem value="Setor" outcome="/paginas/setorItens.xhtml" />
+	            	<p:menuitem value="Função" outcome="/paginas/funcaoItens.xhtml" />
+	            	<p:menuitem value="Unidade" outcome="/paginas/unidadeItens.xhtml" />
+	            	<p:menuitem value="Cor/Raça" outcome="/paginas/corRacaItens.xhtml" />
+	            	<p:menuitem value="Estado Civil" outcome="/paginas/estadoCivilItens.xhtml" />
+	            	<p:menuitem value="País" outcome="/paginas/paisItens.xhtml" />
+	            	<p:menuitem value="Estado" outcome="/paginas/estadoItens.xhtml" />
+	            	<p:menuitem value="Cidade" outcome="/paginas/cidadeItens.xhtml" />
+	            </p:submenu>
+	        </p:submenu>
+	            	        
+	        <p:submenu label="Produto">
+				<p:menuitem value="Conjunto" outcome="/paginas/conjuntoItens.xhtml"/>
+				<p:menuitem value="Volume" outcome="/paginas/volumeItens.xhtml"/>
+				<p:menuitem value="Peça" outcome="/paginas/pecaItens.xhtml"/>
+				<p:menuitem value="Matéria-Prima" outcome="/paginas/materiaPrimaItens.xhtml"/>
+				<p:menuitem value="Estruturas" outcome="/paginas/estruturaItens.xhtml"/>
+	        </p:submenu>
+	        
+	        <p:submenu label="Produção">
+				<p:menuitem value="Lote"/>
+				<p:menuitem value="Ordem de Produção"/>
+				<p:menuitem value="Retrabalho"/>
+			</p:submenu>
+			
+			<p:submenu label="Relatórios">
+			</p:submenu>
+			
+			<p:submenu label="Configurações">
+				<p:menuitem value="Usuário" outcome="/paginas/usuario.xhtml"/>
+				<p:menuitem value="Permissões"/>
+			</p:submenu>
+       </p:panelMenu>
+	</h:form>
+	
+</ui:composition>

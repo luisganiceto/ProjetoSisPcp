@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/templates/Layout.xhtml">
+
+	<ui:define name="conteudo">
+		<div class="ui-fluid">
+			<h:form id="form">
+				<p:panel header="Status">
+				<p:messages id="mensagem"/>
+					<p:panelGrid columns="2"  layout="grid" columnClasses="ui-grid-col-2,ui-grid-col-5" styleClass="ui-panelgrid-blank" >
+						<p:outputLabel for="statusPara" value="Status para:" />
+			            <p:selectOneMenu id="statusPara" filter="true" value="#{statusBean.status.idTipoStatus}" converter="omnifaces.SelectItemsConverter"
+			            	required="true" requiredMessage="O campo Status Para é Obrigatório">
+			            	<f:selectItem itemValue="" itemLabel="Selecione um tipo de Status"/>
+			            	<f:selectItems value="#{statusBean.tipoStatus}" var="tipoStatus"
+			            		itemValue="#{tipoStatus}" itemLabel="#{tipoStatus.descricao}"/>
+			            </p:selectOneMenu>
+			            
+			            <p:outputLabel for="descricao" value="Descrição:" />
+			            <p:inputText id="descricao" maxlength="20" size="15" value="#{statusBean.status.descricaoStatus}"
+			            	required="true" requiredMessage="O campo Descrição é Obrigatótio"/>
+            		</p:panelGrid>
+					<p:panelGrid columns="3" layout="grid" styleClass="ui-panelgrid-blank">
+			        	<p:commandButton  value="Limpar" actionListener="#{statusBean.limpar}" update="form"/>
+			        	<p:commandButton  value="Salvar" actionListener="#{statusBean.salvar}" update="form"/>
+			        	<p:commandButton  value="Voltar" action="/paginas/statusItens.xhtml?faces-redirect=true" immediate="true"/>
+			       </p:panelGrid>
+				</p:panel>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

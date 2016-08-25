@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/Layout.xhtml">
+	
+	<ui:define name="conteudo">
+		<div class="ui-fluid">
+			<h:form id="form" class="form" >
+				<p:panel header="Tipo Status Listagem" >
+				<p:messages id="mensagem" />
+					<p:dataTable id="tabelaItens" reflow="true" emptyMessage="Nenhum Registro Encontrado." value="#{tipoStatusBean.tiposDeStatus}" var="varTipoStatus">
+					<f:facet name="header">
+						<p:commandButton value="Adicionar" action="/paginas/tipoStatusDados.xhtml?faces-redirect=true" actionListener="#{tipoStatusBean.novo}"/>
+					</f:facet>
+						<p:column headerText="ID">	
+							<h:outputText value="#{varTipoStatus.id}" />
+						</p:column>
+						
+						<p:column headerText="Descrição">
+							<h:outputText value="#{varTipoStatus.descricao}" />
+						</p:column>
+						
+						<p:column headerText="Opções">
+							<p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank">
+								<p:commandButton icon="fa fa-trash" actionListener="#{tipoStatusBean.excluir}" update=":form:mensagem :form:tabelaItens">
+									<p:confirm header="Remover" message="Deseja realmente excluir o Tipo de Status?" icon="fa fa-exclamation-triangle" />
+									<f:attribute name="tipoExcluido" value="#{varTipoStatus}" />
+								</p:commandButton>
+								<p:commandButton icon="fa fa-pencil-square-o" actionListener="#{tipoStatusBean.editar}" action="/paginas/tipoStatusDados.xhtml?faces-redirect=true">
+									<f:attribute name="tipoEditado" value="#{varTipoStatus}"/>
+								</p:commandButton>
+							</p:panelGrid>
+						</p:column>
+					</p:dataTable>
+					<p:confirmDialog global="true">
+						<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+						<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times"/>
+					</p:confirmDialog>
+					
+				</p:panel>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

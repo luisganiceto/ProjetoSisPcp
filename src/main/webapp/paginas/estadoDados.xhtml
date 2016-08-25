@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/templates/Layout.xhtml">
+
+	<ui:define name="conteudo">
+		<div class="ui-fluid">
+			<h:form>
+				<p:panel header="Estado"> 
+				<p:messages id="mensagem" />
+					<p:panelGrid id="inputs" columns="3"  layout="grid" columnClasses="ui-grid-col-2,ui-grid-col-5,ui-grid-col-5" styleClass="ui-panelgrid-blank" >
+						<p:outputLabel for="codigoEstado" value="Código UF:" />
+			            <p:inputText id="codigoEstado" maxlength="2" size="5" value="#{estadoBean.estado.codUF}" title="Código do Estado que será cadastrado"
+			            	required="true" requiredMessage="O campo Código UF é Obrigatório"/>
+			            <p:tooltip for="codigoEstado" position="rigth"/>
+			            
+			            <p:outputLabel for="nomeEstado" value="Descrição do Estado:" />
+			            <p:inputText id="nomeEstado" maxlength="30" size="30" value="#{estadoBean.estado.descricaoEstado}" title="Nome do Estado"
+			            	required="true" requiredMessage="O campo Descrição do Estado é Obrigatório"/>
+			            <p:tooltip for="nomeEstado" position="rigth"/>
+			            
+			            <p:outputLabel for="paisEstado" value="País:" />
+			            <p:selectOneMenu id="paisEstado" filter="true" value="#{estadoBean.estado.idPais}" title="Selecione o País onde fica o Estado" 
+			            	converter="omnifaces.SelectItemsConverter" required="true" requiredMessage="O campo País é Obrigatório">
+			            	<f:selectItem noSelectionOption="true" itemLabel="Selecione um País"/>
+			            	<f:selectItems value="#{estadoBean.paises}" var="itensPaises" 
+			            		itemValue="#{itensPaises}" itemLabel="#{itensPaises.descricaoPais}"/>
+			            </p:selectOneMenu>
+			            <p:tooltip for="paisEstado" position="right"/>
+            		</p:panelGrid>
+					<p:panelGrid columns="3" layout="grid" styleClass="ui-panelgrid-blank">
+			        	<p:commandButton  value="Limpar" actionListener="#{estadoBean.novo()}" update="inputs"/>
+			        	<p:commandButton  value="Salvar" actionListener="#{estadoBean.salvar}" update="mensagem inputs" />
+			        	<p:commandButton  value="Voltar" action="/paginas/estadoItens.xhtml?faces-redirect=true" immediate="true"/>
+			       </p:panelGrid>
+				</p:panel>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

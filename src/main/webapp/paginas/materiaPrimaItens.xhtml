@@ -1,0 +1,66 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/Layout.xhtml">
+	
+	<ui:define name="conteudo">
+		<div class="ui-fluid">
+			<h:form id="frm" class="form" >
+				<p:panel header="Matéria Prima Listagem" >
+				<p:messages id="mensagem"/>
+					<p:dataTable reflow="true" emptyMessage="Nenhum Registro Encontrado." value="#{materiaPrimaBean.materiasPrimas}"
+						var="varMP" id="tabelaItens">
+					<f:facet name="header">
+						<p:commandButton value="Adicionar" actionListener="#{materiaPrimaBean.novo}" 
+							action="/paginas/materiaPrimaDados.xhtml?faces-redirect=true"/>
+					</f:facet>
+						<p:column headerText="ID">
+							<h:outputText value="#{varMP.id}" />
+						</p:column>
+						
+						<p:column headerText="Código Produto">
+							<h:outputText value="#{varMP.codigoProduto}" />
+						</p:column>
+						
+						<p:column headerText="Descrição">
+							<h:outputText value="#{varMP.descricaoProduto}" />
+						</p:column>
+						
+						<p:column headerText="Estoque">
+							<h:outputText value="#{varMP.quantidadeEstoque}" />
+						</p:column>
+						
+						<p:column headerText="Controle">
+							<h:outputText value="#{varMP.unidadeControle.codUnidade}" />
+						</p:column>
+						
+						<p:column headerText="Ativo" >
+							<p:selectBooleanCheckbox value="#{varMP.ativo}" />
+						</p:column>
+						
+						<p:column headerText="Opções">
+							<p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank">
+								<p:commandButton icon="fa fa-trash" actionListener="#{materiaPrimaBean.excluir}" update=":frm:mensagem :frm:tabelaItens">
+									<p:confirm header="Remover" message="Deseja realmente excluir essa Matéria Prima?" icon="fa fa-exclamation-triangle"/>
+									<f:attribute name="materiaPrimaExcluido" value="#{varMP}"/>
+								</p:commandButton>
+								<p:commandButton icon="fa fa-pencil-square-o" actionListener="#{materiaPrimaBean.editar}" action="/paginas/materiaPrimaDados.xhtml?faces-redirect=true" >
+									<f:attribute name="materiaPrimaExcluido" value="#{varMP}"/>
+								</p:commandButton>
+								
+								
+							</p:panelGrid>
+						</p:column>
+					</p:dataTable>
+					<p:confirmDialog global="true">
+						<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+						<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times"/>
+					</p:confirmDialog>
+					
+				</p:panel>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/Layout.xhtml">
+	
+	<ui:define name="conteudo">
+		<div class="ui-fluid">
+			<h:form id="frm" class="form" >
+				<p:panel header="Conjunto Listagem" >
+				<p:growl id="mensagem" sticky="true"/>
+					<p:dataTable id="tabelaItens" reflow="true" emptyMessage="Nenhum Registro Encontrado." value="#{conjuntoBean.conjuntos}" 
+						var="varConjunto">
+					<f:facet name="header">
+						<p:commandButton value="Adicionar" action="/paginas/conjuntoDados.xhtml?faces-redirect=true" actionListener="#{conjuntoBean.novo}"/>
+					</f:facet>
+						<p:column headerText="ID">
+							<h:outputText value="#{varConjunto.id}" />
+						</p:column>
+						
+						<p:column headerText="Código Produto">
+							<h:outputText value="#{varConjunto.codigoProduto}" />
+						</p:column>
+						
+						<p:column headerText="Descrição">
+							<h:outputText value="#{varConjunto.descricaoProduto}" />
+						</p:column>
+						
+						<p:column headerText="Volume">
+							<h:outputText value="#{varConjunto.quantidadeVolume}" />
+						</p:column>
+						
+						<p:column headerText="Custo">
+							<h:outputText value="#{varConjunto.valorCusto}" />
+						</p:column>
+						
+						<p:column headerText="Preço Líquido">
+							<h:outputText value="#{varConjunto.valorLiquido}" />
+						</p:column>
+						
+						<p:column headerText="Opções">
+							<p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank">
+								<p:commandButton icon="fa fa-trash" actionListener="#{conjuntoBean.excluir}" update=":frm:mensagem :frm:tabelaItens">
+									<p:confirm header="Remover" message="Deseja realmente excluir esse Conjunto?" icon="fa fa-exclamation-triangle"/>
+									<f:attribute name="conjuntoExcluido" value="#{varConjunto}"/>
+								</p:commandButton>
+								<p:commandButton icon="fa fa-pencil-square-o" actionListener="#{conjuntoBean.editar}" action="/paginas/conjuntoDados.xhtml?faces-redirect=true" >
+									<f:attribute name="conjuntoEditado" value="#{varConjunto}"/>
+								</p:commandButton>
+							</p:panelGrid>
+						</p:column>
+					</p:dataTable>
+					<p:confirmDialog global="true">
+						<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+						<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times"/>
+					</p:confirmDialog>
+				</p:panel>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

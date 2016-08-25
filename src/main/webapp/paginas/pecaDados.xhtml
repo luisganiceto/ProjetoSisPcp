@@ -1,0 +1,91 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/templates/Layout.xhtml">
+
+	<ui:define name="conteudo">
+		<div class="ui-fluid">
+			<p:panel header="Peça">
+				<h:form id="form">
+				<p:messages/>
+					<p:fieldset legend="Identificação" style="margin-bottom:20px">
+						<p:panelGrid id="camposIdentificacao" columns="2"  layout="grid" columnClasses="ui-grid-col-2,ui-grid-col-5"
+							styleClass="ui-panelgrid-blank" >
+							<p:outputLabel for="codPeca" value="Código Produto:"/>
+							<p:inputMask id="codPeca" mask="9.99.999999.999" maxlength="20" value="#{pecaBean.peca.codigoProduto}" 
+								validator="#{pecaBean.validarCampoCodigoPeca}" required="true" 
+								requiredMessage="O campo Código Produto é Obrigatório" disabled="#{pecaBean.vf1}"/>
+							
+							<p:outputLabel for="descricao" value="Descrição do Produto:"/>
+							<p:inputText id="descricao" maxlength="100" value="#{pecaBean.peca.descricaoProduto}"
+								required="true" requiredMessage="O campo Descrição do Produto é Obrigatório" disabled="#{pecaBean.vf1}"/>
+							
+							<p:outputLabel value="Ativo:"/>
+							<p:selectBooleanCheckbox value="#{pecaBean.peca.ativo}" disabled="#{pecaBean.vf1}"/>
+							
+							<p:outputLabel value="Observações:"/>
+							<p:inputTextarea rows="2" cols="50" value="#{pecaBean.peca.observacoes}" disabled="#{pecaBean.vf1}"/>
+							
+						</p:panelGrid>
+					</p:fieldset>
+					<p:fieldset legend="Ficha Técnica" style="margin-bottom:20px">
+						<p:panelGrid id="camposFicha" columns="2"  layout="grid" columnClasses="ui-grid-col-2,ui-grid-col-5" 
+							styleClass="ui-panelgrid-blank" disabled="#{pecaBean.vf1}" >
+							
+							<p:outputLabel value="Comprimento:"/>
+							<p:inputText value="#{pecaBean.peca.comprimento}" disabled="#{pecaBean.vf1}">
+								<f:convertNumber locale="pt_BR" minFractionDigits="4"/>
+							</p:inputText>
+							
+							<p:outputLabel value="Espessura:"/>
+							<p:inputText value="#{pecaBean.peca.espessura}" disabled="#{pecaBean.vf1}">
+								<f:convertNumber locale="pt_BR" minFractionDigits="4"/>
+							</p:inputText>
+						
+							<p:outputLabel value="Largura:"/>
+							<p:inputText value="#{pecaBean.peca.largura}" disabled="#{pecaBean.vf1}">
+								<f:convertNumber locale="pt_BR" minFractionDigits="4"/>
+							</p:inputText>
+							
+							<p:outputLabel value="Peso:"/>
+							<p:inputText value="#{pecaBean.peca.pesoBruto}" disabled="#{pecaBean.vf1}">
+								<f:convertNumber locale="pt_BR" minFractionDigits="4"/>
+							</p:inputText>
+						</p:panelGrid>
+					</p:fieldset>
+					<p:fieldset legend="Valores" style="margin-bottom:20px">
+						<p:panelGrid id="camposValores" columns="2"  layout="grid" columnClasses="ui-grid-col-2,ui-grid-col-5" 
+							styleClass="ui-panelgrid-blank" >	
+							<p:outputLabel value="Custo:"/>
+							<p:inputText value="#{pecaBean.peca.valorCusto}" disabled="true">
+								<f:convertNumber locale="pt_BR" minFractionDigits="4"/>
+							</p:inputText>
+							
+							<p:outputLabel value="Preço Bruto:"/>
+							<p:inputText value="#{pecaBean.peca.valorBruto}" disabled="#{pecaBean.vf1}">
+								<f:convertNumber locale="pt_BR" minFractionDigits="4"/>
+							</p:inputText>
+							
+							<p:outputLabel value="Preço Líquido:"/>
+							<p:inputText value="#{pecaBean.peca.valorLiquido}" disabled="#{pecaBean.vf1}">
+								<f:convertNumber locale="pt_BR" minFractionDigits="4"/>
+							</p:inputText>
+						</p:panelGrid>
+					</p:fieldset>
+					<p:panelGrid columns="6" layout="grid" styleClass="ui-panelgrid-blank">
+				       	<p:commandButton  value="Novo" actionListener="#{pecaBean.novo}" update="form" icon="fa fa-sticky-note-o"/>
+				       	<p:commandButton  value="Editar" actionListener="#{pecaBean.liberarEdicao}" update="form" icon="fa fa-pencil-square-o" 
+				       		disabled="#{pecaBean.vf2}"/>
+				       	<p:commandButton  value="Salvar" actionListener="#{pecaBean.salvar}" update="form" icon="fa fa-floppy-o " 
+				       		disabled="#{pecaBean.vf1}"/>
+				       	<p:commandButton  value="Estrutura" action="/paginas/estruturaItens.xhtml?faces-redirect=true" icon="fa fa-link" disabled="#{pecaBean.vf2}" />
+				       	<p:commandButton  value="Listagem Peça" action="/paginas/pecaItens.xhtml?faces-redirect=true" immediate="true" 
+				       		icon="fa fa-list-alt"/>
+				    </p:panelGrid>
+				</h:form>
+			</p:panel>
+				
+		</div>
+	</ui:define>
+</ui:composition>

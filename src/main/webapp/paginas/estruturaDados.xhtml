@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/templates/Layout.xhtml">
+
+	<ui:define name="conteudo">	
+		<div class="ui-fluid">
+			<p:panel header="Estrutura">
+				<h:form id="form">
+				<p:messages/>
+					<p:fieldset legend="Estrutura" style="margin-bottom:20px">
+						<p:panelGrid columns="2"  layout="grid" columnClasses="ui-grid-col-2,ui-grid-col-6" 
+							styleClass="ui-panelgrid-blank" >
+								<h:outputText value="Estrutura Para:" />
+						        <p:selectOneRadio value="#{estruturaBean.tipoEstrutura}" layout="responsive" columns="3">
+						        	<p:ajax event="change" listener="#{estruturaBean.listarProdutos}" update="estrutura" process="@this" />
+            						<f:selectItem itemLabel="Conjunto" itemValue="C"/>
+            						<f:selectItem itemLabel="Volume" itemValue="V"/>
+            						<f:selectItem itemLabel="Peça" itemValue="P"/>
+        						</p:selectOneRadio>
+						        
+								<p:outputLabel value="Estrutura" />
+								<p:selectOneMenu id="estrutura" filter="true" value="#{estruturaBean.estrutura.idProduto}" converter="omnifaces.SelectItemsConverter">
+									<f:selectItem noSelectionOption="true" itemLabel="Selecio a Estrutura"/>
+									<f:selectItems value="#{estruturaBean.produtos}" var="varProduto"
+										itemValue="#{varProduto}" itemLabel="#{varProduto.descricaoProduto}"/>
+										<p:ajax event="change" listener="#{estruturaBean.sugerirCodReduzido}" update="codRed" process="@this"/>
+								</p:selectOneMenu>
+							
+								<p:outputLabel value="Código Reduzido" />
+								<p:inputText id="codRed" value="#{estruturaBean.estrutura.codigoReduzido}"/>
+								
+								<p:outputLabel value="Tipo Produto" />
+								<p:selectOneMenu filter="true" value="#{estruturaBean.estrutura.idTipo}" converter="omnifaces.SelectItemsConverter">
+									<f:selectItem noSelectionOption="true" itemLabel="Selecio o Tipo do Produto"/>
+									<f:selectItems value="#{estruturaBean.tipos}" var="varTipo"
+										itemValue="#{varTipo}" itemLabel="#{varTipo.descricaoTipo}"/>
+								</p:selectOneMenu>
+							</p:panelGrid>
+							<p:panelGrid columns="6" layout="grid" styleClass="ui-panelgrid-blank">
+						       	<p:commandButton  value="Novo" actionListener="#{estruturaBean.novo}" update="form" icon="fa fa-sticky-note-o"/>
+						       	<p:commandButton  value="Editar" actionListener="#{estruturaBean.editar}" update="form" icon="fa fa-pencil-square-o"/>
+						       	<p:commandButton  value="Salvar" actionListener="#{estruturaBean.salvar}" update="form" icon="fa fa-floppy-o"/>
+						       	<p:commandButton  value="Listagem Estrutura" action="/paginas/estruturaItens.xhtml?faces-redirect=true" immediate="true" 
+						       		icon="fa fa-list-alt"/>
+						    </p:panelGrid>
+						</p:fieldset>
+						<p:fieldset legend="Componente" style="margin-bottom:20px">
+								<p:dataTable>
+									<f:facet name="header">
+										<p:commandButton value="Adicionar Matéria Prima"/>
+									</f:facet>
+									<p:column headerText="Cód Matéria Prima">
+									</p:column>
+									<p:column headerText="Matéria Prima">
+									</p:column>
+									<p:column headerText="Qtde Usada">
+									</p:column>
+									<p:column headerText="Cód Unidade">
+									</p:column>
+									<p:column headerText="Excluir">
+									</p:column>
+								</p:dataTable>
+						</p:fieldset>
+				</h:form>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>
